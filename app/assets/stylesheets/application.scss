@@ -17,8 +17,21 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "navbar";
+@import "infobar";
 
 
 html {
+  background-color: transparent;
+}
+
+body {
   background-color: darkgray;
+}
+
+.search-bar {
+  display: inline-block;
+  position: relative;
+  margin-top: 10px;
+  margin-right: 15px;
+  margin-left: 12px;
 }

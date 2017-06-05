@@ -29,3 +29,6 @@ anna = User.create(email: "anna@musify.com", password: "abcd1234")
 hendrik = User.create(email: "hendrik@musify.com", password: "abcd1234")
 steve = User.create(email: "steve@musify.com", password: "abcd1234")
 carla = User.create(email: "carla@musify.com", password: "abcd1234")
+
+# Songs
+song1 = Song.create(title: "Song 2", description: "The track was originally nicknamed Song 2 as a working title, but the name stuck.", track_number: 2, image_url: "https://upload.wikimedia.org/wikipedia/en/7/72/Blur_song_2_CD1.jpg")
