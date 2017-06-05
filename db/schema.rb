@@ -10,25 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605023700) do
+ActiveRecord::Schema.define(version: 20170605171647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "albums", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "artists", force: :cascade do |t|
     t.string "name"
     t.text "bio"
-    t.datetime "date_created"
-    t.string "profile_img"
+    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "genrefications", force: :cascade do |t|
-    t.integer "genre_id"
-    t.integer "song_id"
+    t.bigint "artist_id"
+    t.bigint "album_id"
+    t.bigint "song_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_genrefications_on_album_id"
+    t.index ["artist_id"], name: "index_genrefications_on_artist_id"
+    t.index ["song_id"], name: "index_genrefications_on_song_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -39,10 +50,8 @@ ActiveRecord::Schema.define(version: 20170605023700) do
 
   create_table "profiles", force: :cascade do |t|
     t.string "name"
-    t.text "description"
+    t.text "bio"
     t.bigint "user_id"
-    t.string "profile_img"
-    t.string "theme"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
@@ -51,18 +60,8 @@ ActiveRecord::Schema.define(version: 20170605023700) do
   create_table "songs", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.datetime "created_at", null: false
-    t.string "song_img"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "themes", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "themifications", force: :cascade do |t|
+    t.integer "track_number"
+    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -84,5 +83,8 @@ ActiveRecord::Schema.define(version: 20170605023700) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "genrefications", "albums"
+  add_foreign_key "genrefications", "artists"
+  add_foreign_key "genrefications", "songs"
   add_foreign_key "profiles", "users"
 end
