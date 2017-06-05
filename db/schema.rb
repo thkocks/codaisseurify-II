@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605171647) do
+ActiveRecord::Schema.define(version: 20170605172747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albumifications", force: :cascade do |t|
+    t.bigint "artist_id"
+    t.bigint "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_albumifications_on_artist_id"
+    t.index ["song_id"], name: "index_albumifications_on_song_id"
+  end
 
   create_table "albums", force: :cascade do |t|
     t.string "title"
@@ -21,6 +30,15 @@ ActiveRecord::Schema.define(version: 20170605171647) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "artistifications", force: :cascade do |t|
+    t.bigint "album_id"
+    t.bigint "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_artistifications_on_album_id"
+    t.index ["song_id"], name: "index_artistifications_on_song_id"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -83,6 +101,10 @@ ActiveRecord::Schema.define(version: 20170605171647) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "albumifications", "artists"
+  add_foreign_key "albumifications", "songs"
+  add_foreign_key "artistifications", "albums"
+  add_foreign_key "artistifications", "songs"
   add_foreign_key "genrefications", "albums"
   add_foreign_key "genrefications", "artists"
   add_foreign_key "genrefications", "songs"
