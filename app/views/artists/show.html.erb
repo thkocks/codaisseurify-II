@@ -1,0 +1,29 @@
+<ul class="sidebar-list">
+  <li><%= link_to "Back", artists_path, class: "btn btn-primary" %>
+    <%= link_to "Edit", edit_artist_path, class: "btn btn-primary" %>
+    <%= link_to "Delete", artist_path(@artist.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
+    <%= link_to "Add song", new_song_path, class: "btn btn-primary" %>
+  </li>
+</ul>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading"><%= @artist.name %></div>
+
+  <div class="panel-body">
+
+    <p>Artist: <%= @artist.name %></p>
+    <p>Bio: <%= @artist.bio %></br></p>
+    <div class="profile-img-large">
+    <%=image_tag @artist.image_url %>
+    <!-- <p></br>Songs:</p>
+    <% if @artist.songs.any? %>
+      <ul>
+        <% @artist.songs.each do |song| %>
+          <li><%= song.title %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No songs added yet</p>
+    <% end %> -->
+</div>

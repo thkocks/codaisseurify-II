@@ -1,0 +1,19 @@
+<ul class="sidebar-list">
+  <li><%= link_to "Back", root_path, class: "btn btn-primary" %> <%= link_to "Add new artist", new_artist_path, class: "btn btn-primary" %></li>
+</ul>
+
+<% @artists.order_by_name.each do |artist| %>
+  <div class="box">
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-7">
+            <h4><%= link_to (artist.name), artist  %></h4>
+          </div>
+          <div class="profile-img-small">
+            <%= link_to (image_tag artist.image_url), artist %>
+          </div>
+        </div>
+    </div>
+  </div>
+<% end %>
