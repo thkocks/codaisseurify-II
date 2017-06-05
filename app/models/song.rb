@@ -7,4 +7,15 @@ class Song < ApplicationRecord
 
   has_many :albumifications
   has_many :albums, through: :albumifications
+
+  validates :title, :image_url, presence: true
+  validates :description, length: {maximum: 500}
+
+  def self.order_by_title
+    order(:title)
+  end
+
+  def self.order_by_track_number
+    order(:track_number)
+  end
 end
