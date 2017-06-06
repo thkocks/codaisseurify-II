@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170606002738) do
 
   create_table "albums", force: :cascade do |t|
     t.string "name"
-    t.date "released"
+    t.integer "released"
     t.bigint "artist_id"
     t.string "image_url"
     t.text "description"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20170606002738) do
   create_table "artists_genres", id: false, force: :cascade do |t|
     t.bigint "artist_id", null: false
     t.bigint "genre_id", null: false
+    t.index ["artist_id", "genre_id"], name: "index_artists_genres_on_artist_id_and_genre_id"
+    t.index ["genre_id", "artist_id"], name: "index_artists_genres_on_genre_id_and_artist_id"
   end
 
   create_table "genres", force: :cascade do |t|
