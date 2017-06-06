@@ -1,0 +1,25 @@
+<%= form_for @song do |f| %>
+  <div class="form-group">
+    <label>Title</label>
+    <%= f.text_field :name, placeholder: "Title", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>Description</label>
+    <%= f.text_area :description, rows: 5, placeholder: "Describe yourself", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>Release Date</label>
+    <%= f.number_field :released, placeholder: "Year Released", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>Add cover image url</label>
+    <%= f.text_field :image_url, placeholder: "Cover image", class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>
